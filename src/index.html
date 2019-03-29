@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -9,57 +10,59 @@
 </head>
 
 <body>
-    <h1>BMI Calculator</h1> 
 
-        <script type="text/javascript">
-          
-    
-            const global = {}
-    
-            global.calculateForm = document.querySelector('#calculate');
-            global.displayValueElement = document.querySelector('#display_value');
-            global.displayMessageElement = document.querySelector('#display_message');
-    
+<h1>BMI Calculator</h1>
 
-            document.addEventListener('DOMContentLoaded', () => {
-                
-                global.calculateForm.addEventListener('submit', event => {
-                    
+<script type="text/javascript">
+       
+       const global = {}
+
+       global.calculateForm = document.querySelector('#calculate');
+       global.displayValueElement = document.querySelector('#display_value');
+       global.displayMessageElement = document.querySelector('#display_message');
+
+
+       document.addEventListener('DOMContentLoaded', () => {
+                    global.calculateForm.addEventListener('submit', event => {
                     event.preventDefault();
-                    
                     calculateBMI()
-                        .then(person => {
-                            global.displayValueElement.innerHTML = `Your BMI is ${person.bmiValue}`;
-                            global.displayMessageElement.innerHTML = `and you are ${person.bmiMessage}`;
-                        })
-                })
-            });
-    
-            const calculateBMI = () => {
-                return new Promise(resolve => {
-                    let w = parseFloat(document.getElementById('weight-in-kgs').value);
-                    let h = parseFloat(document.getElementById('height-in-cm').value);
-                    let person = new Person({
-                        weight: w,
-                        height: h,
-                    });
-                    person.calculate_bmi();
-                    resolve(person);
-                })
-            };
-    </script>
-    <select name="Choose your method" id="selector">
-        <option value> Please, choose your own method</option>
-        <option id="metric" value="metric">Metric</option>
-        <option id="imperial" value="imperial">imperial</option>
-        </select>
+                    .then(person => {
+                    global.displayValueElement.innerHTML = `Your BMI is ${person.bmiValue}`;
+                    global.displayMessageElement.innerHTML = `and you are ${person.bmiMessage}`;
+                    })
+            })
+        });
 
-    <form id="calculate"></form>
+       const calculateBMI = () => {
+           return new Promise(resolve => {
+             
+               let w = parseFloat(document.getElementById('weight-in-kgs').value);
+               let h = parseFloat(document.getElementById('height-in-cm').value);
+               let person = new Person({
+                   weight: w,
+                   height: h,
+               });
+               person.calculate_bmi();
+               resolve(person);
+           })
+       };
+</script>
     
+<form id="calculate">
         <div id="metric-inputs">
             <input type="text" id="weight-in-kgs" placeholder="Weight">
             <input type="text" id="height-in-cm" placeholder="Height">
         </div>
+
+        <div class="form-group row">
+                <div class="col-auto">
+                  <select class="form-control" id="my_select">
+                    <option value="metric">Metric System</option>
+                    <option value="imperial">Imperial System</option>
+                  </select>
+                </div>
+            </div>
+
 
         <button type="submit" value="Calculate"> Calculate </button>
     </form>
@@ -67,6 +70,10 @@
         <span id="display_value"></span>
         <span id="display_message"></span>
     </div>
+
+    </div>
+
+    
 
 </body>
 
