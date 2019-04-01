@@ -1,24 +1,30 @@
-require('../spec.helper')
+const {Person, BMICalculator} = require('./spec.helper');
 
-
-const calculateBMI = () => {
-    var method = global.methodSelector.options[global.methodSelector.selectedIndex].value
+describe('BMICalculator', function() {
+    let bmi_calculator;
+    let person;
     
-    return new Promise(resolve => {
+    beforeEach(function(){
+        person = new Person({weight: 90, height: 186});
+        calculator = new BMICalculator();
+    });
+    
+    it("calculates BMI for a person using metric method", function(){
+        calculator.metric_bmi(person);
+        expect(person.bmiValue).to.equal(26.01);
+    });
+    it("sets BMI message for person using metric method", function(){
+        calculator.metric_bmi(person);
+        expect(person.bmiMessage).to.equal('Overweight');
+    });
+    it("calculates BMI for a person using imperial method", function(){
+        calculator.imperial_bmi(person);
+        expect(person.bmiValue).to.equal(1.83);
+    });
+    it("sets BMI message for person using imperial method", function(){
+        calculator.imperial_bmi(person);
+        expect(person.bmiMessage).to.equal('Underweight');
+    });
+})
 
-        let weightFormat = method === 'metric' ? 'weight-in-kgs' : 'weight-in-lbs'
-        let heightFormat = method === 'metric' ? 'height-in-cm' : 'height-in-in'
-
-        let w = parseFloat(document.getElementById(weightFormat).value);
-        let h = parseFloat(document.getElementById(heightFormat).value);
-
-        let person = new Person({
-            weight: w,
-            height: h,
-        });
-
-        method === 'metric' ? person.calculate_bmi() : person.calculate_imperial_bmi();
-        resolve(person);
-    })
-};
 
