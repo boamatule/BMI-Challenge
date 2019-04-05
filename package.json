@@ -19,5 +19,8 @@
   "devDependencies": {
     "e2e_training_wheels": "0.0.36",
     "tailwindcss": "^0.7.4"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
   }
 }

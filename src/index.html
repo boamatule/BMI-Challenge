@@ -6,39 +6,48 @@
     <title></title>
     <script src="js/person.js"></script>
     <script src="js/calculator.js"></script>
-
+    <script src="//cdn.muicss.com/mui-0.9.41/extra/mui-combined.js"></script>
     <link href="//cdn.muicss.com/mui-0.9.41/css/mui.min.css" rel="stylesheet" type="text/css" />
-<script src="//cdn.muicss.com/mui-0.9.41/js/mui.min.js"></script>
+    <script src="//cdn.muicss.com/mui-0.9.41/js/mui.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="style.css" />
 
 </head>
 
 <body>
+    
 <h1>BMI Calculator</h1>
 
-    <br>
-    <select name="Choose method" id="selector">
-    <br> 
-        <option value="">--Please choose a method--</option>
-        <option id="metric" value="metric">Metric</option>
-        <option id="imperial" value="imperial">Imperial</option>
-    </select>
+
+    
         <form id="calculate">
                 <div id="metric-inputs">
                     <input type="text" id="weight-in-kgs" placeholder="Weight">
                     <input type="text" id="height-in-cm" placeholder="Height">
                 </div>
-        
-                <button type="submit" value="Calculate"> Calculate </button>
+                <br>
+
+                <select name="Choose method" id="selector">
+                        <option value="">--Please choose a method--</option>
+                        <option id="metric" value="metric">Metric</option>
+                        <option id="imperial" value="imperial">Imperial</option>
+                </select>
+                <br> <br>
+            <button class="mui-btn" type="submit" value="Calculate"> Calculate </button>
             </form>
+
             <div>
                 <span id="display_value"></span>
                 <span id="display_message"></span>
-            </div>
-            
+            </di>
+
+
+
     <script type="text/javascript">
-       const global = {}
-       
-       const calculateBMI = () => {
+    
+    const global = {}
+    const calculateBMI = () => {
             return new Promise (resolve => {
                 let c = document.getElementById('selector');
                 let ctext = c.options[c.selectedIndex].text;
@@ -68,11 +77,12 @@
                     .then(person => {
                     global.displayValueElement.innerHTML =`Your BMI is ${person.bmiValue}`;
                     global.displayMesseageElement.innerHTML = `and you are ${person.bmiMessage}.`;
+                    global.document.getElementById("Calculate").reset();
                 })
             })
         });
         
-        </script>
+    </script>
 
 </body>
 
